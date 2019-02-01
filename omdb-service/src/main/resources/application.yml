@@ -1,0 +1,15 @@
+omdb:
+    key: "7941b866"
+---
+micronaut:
+    application:
+        name: omdb-service
+    server:
+        port: 8081
+
+---
+consul:
+  client:
+    registration:
+      enabled: true
+    defaultZone: "${CONSUL_HOST:172.17.0.1}:${CONSUL_PORT:8500}"

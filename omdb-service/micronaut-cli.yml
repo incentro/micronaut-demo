@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: omdb.service
+---
+testFramework: junit
+sourceLanguage: java

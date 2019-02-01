@@ -1,0 +1,15 @@
+---
+micronaut:
+    application:
+        name: gateway-service
+    server:
+        port: 8080
+        cors:
+          enabled: true
+
+---
+consul:
+  client:
+    registration:
+      enabled: true
+    defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
