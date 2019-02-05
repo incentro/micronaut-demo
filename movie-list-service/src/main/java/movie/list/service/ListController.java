@@ -23,11 +23,8 @@ public class ListController {
         public void postUser(@Body String body) {
 
         PostUserData userData = gson.fromJson(body, PostUserData.class);
-
-        String userName = userData.userName;
-
-
-        Document doc = new Document("userName", userName);
+        
+        Document doc = new Document("userName", userData.userName);
 
         if(userData.movies != null) {
 
