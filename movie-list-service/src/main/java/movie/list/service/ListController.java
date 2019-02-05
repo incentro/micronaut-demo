@@ -23,7 +23,7 @@ public class ListController {
         public void postUser(@Body String body) {
 
         PostUserData userData = gson.fromJson(body, PostUserData.class);
-        
+
         Document doc = new Document("userName", userData.userName);
 
         if(userData.movies != null) {
@@ -37,14 +37,14 @@ public class ListController {
 
             doc.append("movies", moviesDocList);
         }
-        dbConn.collection.insertOne(doc);
+        dbConn.getCollection().insertOne(doc);
     }
 
     @Get("/user/{userName}")
     public HttpResponse getUserMovieList(String userName) {
         BasicDBObject findUser = new BasicDBObject();
         findUser.put("userName", userName);
-        FindIterable<Document> userList = dbConn.collection.find(findUser);
+        FindIterable<Document> userList = dbConn.getCollection().find(findUser);
         Document doc = userList.first();
 
         if(doc == null) {

@@ -19,7 +19,6 @@ public class MoviesController {
 
     @Get("/movies/{keyword}")
     List<Movie> getByKeywords(String keyword) {
-
         return (gson.fromJson(moviesSearcher.searchMovies(keyword), OmdbData.class)).Search;
     }
 

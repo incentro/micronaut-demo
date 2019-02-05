@@ -1,3 +1,10 @@
+test: "test string"
+mongodb:
+  ip: "127.0.0.1"
+  port: 27017
+  db: test
+  collection: users
+
 ---
 micronaut:
     application:
@@ -13,3 +20,7 @@ consul:
     registration:
       enabled: true
     defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
+
+---
+
+
