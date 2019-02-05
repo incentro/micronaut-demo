@@ -4,6 +4,8 @@ import com.google.gson.*;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 
+import java.util.List;
+
 @Controller("/api")
 public class MoviesController {
 
@@ -16,10 +18,9 @@ public class MoviesController {
     }
 
     @Get("/movies/{keyword}")
-    Movie[] getByKeywords(String keyword) {
-        return gson.fromJson(
-                gson.fromJson(moviesSearcher.searchMovies(keyword), JsonObject.class)
-                        .get("Search").toString(), Movie[].class);
+    List<Movie> getByKeywords(String keyword) {
+
+        return (gson.fromJson(moviesSearcher.searchMovies(keyword), OmdbData.class)).Search;
     }
 
     @Get("/movie/{id}")

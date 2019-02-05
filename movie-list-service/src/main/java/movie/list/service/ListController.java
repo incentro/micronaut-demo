@@ -22,17 +22,16 @@ public class ListController {
     @Post("/user")
         public void postUser(@Body String body) {
 
-        JsonObject userObj = gson.fromJson(body, JsonObject.class);
+        PostUserData userData = gson.fromJson(body, PostUserData.class);
 
-        String userName = userObj.get("userName").getAsString();
+        String userName = userData.userName;
 
-        Movie[] movies = gson.fromJson(userObj.get("movies").toString(), Movie[].class);
 
         Document doc = new Document("userName", userName);
 
-        if(movies != null) {
+        if(userData.movies != null) {
 
-            List<BasicDBObject> moviesDocList = Arrays.stream(movies).map(m -> {
+            List<BasicDBObject> moviesDocList = userData.movies.stream().map(m -> {
                 BasicDBObject dbMovie = new BasicDBObject();
                 dbMovie.append("imdbId", m.getImdbId());
                 dbMovie.append("inCollection", m.isInCollection());
