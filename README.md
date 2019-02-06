@@ -32,4 +32,4 @@ The follow-up tutorial is aimed at the use of tracing (monitoring) and security 
 
 https://www.infoq.com/articles/micronaut-tracing-security-serverless
 
-This part of the infoq tutorial is not yet part of the demonstration.
+This part of the infoq tutorial is not yet part of the demonstration. Please note: Micronaut provides /info, /monitor, /health etc. endpoints to monitor your services.
