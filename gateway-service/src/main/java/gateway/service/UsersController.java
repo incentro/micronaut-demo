@@ -2,8 +2,10 @@ package gateway.service;
 
 import io.micronaut.context.annotation.Value;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Post;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 
@@ -17,6 +19,14 @@ public class UsersController {
     public UsersController(UsersFetcher usersFetcher, MoviesFetcher moviesFetcher) {
         this.usersFetcher = usersFetcher;
         this.moviesFetcher = moviesFetcher;
+    }
+
+    @Post("/user")
+    HttpResponse postUser(@Body String body) {
+
+        usersFetcher.sendUser(body);
+
+        return HttpResponse.ok();
     }
 
     @Get("/movie/{imdbId}")
