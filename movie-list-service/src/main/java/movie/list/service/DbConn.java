@@ -3,32 +3,25 @@ package movie.list.service;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import io.micronaut.context.annotation.Property;
 import io.micronaut.context.annotation.Value;
 import org.bson.Document;
 
 import javax.inject.Singleton;
+import java.util.Map;
 
 @Singleton
 public class DbConn {
 
-    @Value("${mongodb.ip}")
-    String mongoIp;
-
-    @Value("${mongodb.port}")
-    Integer mongoPort;
-
-    @Value("${mongodb.db}")
-    String mongoDb;
-
-    @Value("${mongodb.collection}")
-    String mongoColl;
+    @Property(name = "mongodb")
+    Map<String, String> mongoProps;
 
     MongoClient mongoClient;
     MongoDatabase database;
 
     public MongoCollection<Document> getCollection() {
-        mongoClient = new MongoClient(mongoIp, mongoPort);
-        database = mongoClient.getDatabase(mongoDb);
-        return database.getCollection(mongoColl);
+        mongoClient = new MongoClient(mongoProps.get("ip"), Integer.parseInt(mongoProps.get("port")));
+        database = mongoClient.getDatabase(mongoProps.get("db"));
+        return database.getCollection(mongoProps.get("collection"));
     }
 }
