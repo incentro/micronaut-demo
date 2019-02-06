@@ -23,10 +23,7 @@ public class UsersController {
 
     @Post("/user")
     HttpResponse postUser(@Body String body) {
-
-        usersFetcher.sendUser(body);
-
-        return HttpResponse.ok();
+        return usersFetcher.sendUser(body);
     }
 
     @Get("/movie/{imdbId}")
