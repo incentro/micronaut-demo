@@ -1,6 +1,8 @@
 package omdb.service;
 
+import io.reactivex.Single;
+
 public interface MoviesSearcher {
-    String searchMovies(String keyword);
-    String searchId(String id);
+    OmdbData searchMovies(String keyword);
+    Movie searchId(String id);
 }

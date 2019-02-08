@@ -4,7 +4,6 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import io.micronaut.context.annotation.Property;
-import io.micronaut.context.annotation.Value;
 import org.bson.Document;
 
 import javax.inject.Singleton;

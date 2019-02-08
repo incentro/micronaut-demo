@@ -1,5 +1,6 @@
 omdb:
     key: "7941b866"
+    url: "http://www.omdbapi.com"
 ---
 micronaut:
     application:

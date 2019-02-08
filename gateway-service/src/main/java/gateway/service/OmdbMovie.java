@@ -1,16 +1,22 @@
 package gateway.service;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 public class OmdbMovie {
+    @JsonProperty("Title")
     public String title;
 
+    @JsonProperty("Year")
     public String year;
 
+    @JsonProperty("imdbID")
     public String imdbId;
 
+    @JsonProperty("Type")
     public String type;
 
+    @JsonProperty("Poster")
     public String poster;
 
     public boolean inCollection;

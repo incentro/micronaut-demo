@@ -1,13 +1,16 @@
 package movie.list.service;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 public class Movie {
     private String imdbId;
-    @SerializedName("inCollection")
+    @JsonProperty("inCollection")
     private boolean isInCollection;
 
-    public Movie(String imdbId, boolean isInCollection) {
+    @JsonCreator
+    public Movie(@JsonProperty("imdbId") String imdbId, @JsonProperty("inCollection") boolean isInCollection) {
         this.imdbId = imdbId;
         this.isInCollection = isInCollection;
     }

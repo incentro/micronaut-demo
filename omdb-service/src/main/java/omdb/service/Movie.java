@@ -1,21 +1,21 @@
 package omdb.service;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Movie {
-    @SerializedName("Title")
+    @JsonProperty("Title")
     private String title;
 
-    @SerializedName("Year")
+    @JsonProperty("Year")
     private String year;
 
-    @SerializedName("imdbID")
+    @JsonProperty("imdbID")
     private String imdbId;
 
-    @SerializedName("Type")
+    @JsonProperty("Type")
     private String type;
 
-    @SerializedName("Poster")
+    @JsonProperty("Poster")
     private String poster;
 
     public String getTitle() {

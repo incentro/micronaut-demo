@@ -5,9 +5,9 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
+import io.reactivex.Single;
 import org.bson.Document;
 import javax.inject.Inject;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,27 +20,30 @@ public class ListController {
     private DbConn dbConn;
 
     @Post("/user")
-        public HttpResponse postUser(@Body String body) {
+        public Single<HttpResponse<User>> postUser(@Body Single<User> user) {
 
-        PostUserData userData = gson.fromJson(body, PostUserData.class);
+        return user.map(u -> {
+            Document doc = new Document("userName", u.getUserName());
 
-        Document doc = new Document("userName", userData.userName);
+            if(u.getMovies() != null) {
 
-        if(userData.movies != null) {
+                List<BasicDBObject> moviesDocList = u.getMovies().stream().map(m -> {
+                    BasicDBObject dbMovie = new BasicDBObject();
+                    dbMovie.append("imdbId", m.getImdbId());
+                    dbMovie.append("inCollection", m.isInCollection());
+                    return dbMovie;
+                }).collect(Collectors.toList());
 
-            List<BasicDBObject> moviesDocList = userData.movies.stream().map(m -> {
-                BasicDBObject dbMovie = new BasicDBObject();
-                dbMovie.append("imdbId", m.getImdbId());
-                dbMovie.append("inCollection", m.isInCollection());
-                return dbMovie;
-            }).collect(Collectors.toList());
+                doc.append("movies", moviesDocList);
+            }
 
-            doc.append("movies", moviesDocList);
-        }
+            dbConn.getCollection().insertOne(doc);
 
-        dbConn.getCollection().insertOne(doc);
 
-        return HttpResponse.ok();
+            return HttpResponse.created(u);
+        });
+
+
     }
 
     @Get("/user/{userName}")
